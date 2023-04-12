@@ -2,6 +2,24 @@
 
 {% block title %}Hello EntrepriseController!{% endblock %}
 
+{# Le bloc body ici est = a $content dans le MVC d'avant, qui récupéré les infos avec ob_start etc.. #}
+{# ici la vue vient du Controller employé, avec la function index(), qui return bien $this->render('entreprise/index.html.twig', #}
+
 {% block body %}
+    <h1>Liste des entreprises</h1>
+
+    {# {{ }} pour faire un echo en twig #}
+    {# <p>Hello {{ name }}</p> #}
+
+    {# pour afficher un tableau en TWIG c'est comme en PHP, il faut passer par un foreach ( juste for en TWIG) #}
+    {# ATTENTION à inverser la boucle par rapport à PHP, for chaque valeur dans le tableau, et en PHP ca aurait été foreach tableau chaque valeur #}
+    {# {% for valeur in tableau %}
+        <h4>{{ valeur }}</h4>
+    {% endfor %} #}
+
+    {% for entreprise in entreprises %}
+        {{  entreprise.raisonSociale ~ ' (' ~ entreprise.cp ~ ' ' ~ entreprise.ville ~ ')'}} <br>
+    {% endfor %}
+
 
 {% endblock %}

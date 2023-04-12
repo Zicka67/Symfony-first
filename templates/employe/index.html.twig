@@ -2,6 +2,8 @@
 
 {% block title %}Hello EmployeController!{% endblock %}
 
+{# Le bloc body ici est = a $content dans le MVC d'avant, qui récupéré les infos avec ob_start etc.. #}
+{# ici la vue vient du Controller employé, avec la function index(), qui return bien $this->render('employe/index.html.twig', #}
 {% block body %}
-
+<h1>Liste des employés</h1>
 {% endblock %}
