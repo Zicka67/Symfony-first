@@ -111,4 +111,10 @@ class Employe
 
         return $this;
     }
+
+    public function __toString()
+    {
+        // return $this->prenom. " " .$this->nom. " " . $this->ville. "(" .$this->getEntreprise(). ")";
+        return $this->prenom. " " .$this->nom. " " . $this->ville;
+    }
 }
