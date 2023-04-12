@@ -6,4 +6,16 @@
 {# ici la vue vient du Controller employé, avec la function index(), qui return bien $this->render('employe/index.html.twig', #}
 {% block body %}
 <h1>Liste des employés</h1>
+
+{% for employe in employes %}
+
+    {# Equivalent au dump die en php #}
+    {# {{ dump(employe)}} #}
+
+    {# Si __toString existe dans entreprise pour récupérer les infos via toString #}
+    {# {{  employe }} embauché par {{ employe.entreprise }}<br> #}
+    {# OU sans tooString pour récupérer en chainage #}
+    {{  employe.prenom }} {{  employe.nom }} de la ville : {{  employe.ville }} est embauché par {{ employe.entreprise.raisonSociale }} au {{ employe.entreprise.adresse }}<br>
+    {% endfor %}
+
 {% endblock %}
