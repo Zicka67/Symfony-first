@@ -6,6 +6,7 @@ use App\Repository\EmployeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+//Lien avec son repository
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
 class Employe
 {
@@ -29,6 +30,10 @@ class Employe
 
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
+
+    #[ORM\ManyToOne(inversedBy: 'employes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Entreprise $entreprise = null;
 
     public function getId(): ?int
     {
@@ -91,6 +96,18 @@ class Employe
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): self
+    {
+        $this->entreprise = $entreprise;
 
         return $this;
     }
