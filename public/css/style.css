@@ -1,0 +1,37 @@
+
+
+h1 {
+    color: red;
+}
+
+h2 {
+    color: blue;
+}
+
+.test label{
+    display: flex;
+    width: 15vw;
+    margin: 1.5vw auto 0.2vw auto;
+}
+
+.test select{
+    display:  flex;
+    width: 15vw;
+    margin: 0 auto;
+    border-radius: 5px;
+
+}
+
+.test input{
+    display: flex;
+    width: 15vw;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.test button{
+    display: flex;
+    width: 15vw;
+    margin: 1vw auto;
+    border-radius: 5px;
+}
