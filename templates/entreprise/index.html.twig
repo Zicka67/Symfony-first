@@ -8,7 +8,6 @@
 {% block body %}
     <h1>Liste des entreprises</h1>
 
-
     {# Equivalent au dump die en php #}
     {# {{ dump(entreprises) }} #}
 
@@ -26,7 +25,7 @@
         {# OU #}
         {# {{  entreprise.raisonSociale }} ( {{ entreprise.cp }} {{ entreprise.ville }} ) <br> #}
 
-       <a href="{{ path('show_entreprise', {'id': entreprise.id}) }}">{{ entreprise }}</a> <br>
+       <a href="{{ path('show_entreprise', {'id': entreprise.id}) }}">{{ entreprise.raisonSociale }}</a> {{ entreprise.ville }}  {{ entreprise.cp }} {{ entreprise.adresse }}<br>
     {% endfor %}
 
 
