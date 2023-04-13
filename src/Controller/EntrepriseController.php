@@ -4,8 +4,11 @@ namespace App\Controller;
 
 //A importer via clic droit sur (Entreprise::class)
 use App\Entity\Entreprise;
+//A importer via clic droit sur (EntrepriseType::class)
+use App\Form\EntrepriseType;
 //A importer via clic droit sur index(ManagerRegistry $doctrine)
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +26,41 @@ class EntrepriseController extends AbstractController
             'entreprises' => $entreprises
         ]);
     }
+  
+    //Route entre le lien de la méthode et l'URL (qu'on veut afficher)
+    #[Route('/entreprise/add', name: 'add_entreprise')]
+    // Ici on créer une function pour add une entreprise 
+    // en paramètre : 
+    // D'ABORD on ajoute ManagerRegistery $doctrine pour se connecter à la DB
+    // PUIS l'objet qu'on souhaite ajouter ici Entreprise $entreprise, null pour lui donner une valeur par defaut en DB
+    // ENFIN Request
+    public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Request $request): Response {
+        //On va construire un form avec $builder qui est dans EntrepriseType( form ), de l'entity entreprise
+        $form = $this->createForm(EntrepriseType::class, $entreprise);
+        //Ici handleRequest() va analyser les données pour les insérer dans le form
+        $form->handleRequest($request);
+
+        //SI le formulaire est envoyé ET passe les filter
+        if($form->isSubmitted() && $form->isValid() ) {
+            //On créer un objet entreprise et on lui donne (hydrate) les data du form (qu'on a dans form et entrepriseType)
+            $entreprise = $form->getData();
+            //On récupère le manager de $doctrine pour lui faire faire la préparation et l'execution(persist et flush sont natif du manager)
+            $entityManager = $doctrine->getManager();
+            //On PREPARE
+            $entityManager->persist($entreprise);
+            //On EXECUTE
+            $entityManager->flush();
+
+            //Enfin on redirige vers la vue app_entreprise
+            return $this->redirectToRoute('app_entreprise');
+        }
+
+        //Vue pour afficher le formulaire d'ajout
+        return $this->render('entreprise/add.html.twig', [
+            //'leNomQuonVeut' et on lui donne une vue générée par createView du form
+           'formAddEntreprise' => $form->createView()
+        ]);
+    }
 
     #[Route('/entreprise/{id}', name: 'show_entreprise')]
     public function show(Entreprise $entreprise): Response
@@ -31,4 +69,5 @@ class EntrepriseController extends AbstractController
             'entreprise' => $entreprise
         ]);
     }
+    
 }
