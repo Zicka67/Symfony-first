@@ -11,9 +11,8 @@
     <h1>{{ employe.prenom }} {{ employe.nom }}</h1>
     <p>
         {{ employe.ville }} <br>
-        {# {{ employe.entreprise }} grace au toString dans entreprise, il va récupérer les infos dedans #}
-        {# sinon #}
-        Entreprise : {{ employe.entreprise.raisonSociale }} <br>
+        {# {{ employe.entreprise.id }} grace au toString dans entreprise, il va récupérer l'id -> de l'entreprise -> lié a l'employe #}
+        Entreprise : <a href="{{ path('show_entreprise', {'id': employe.entreprise.id}) }}">{{ employe.entreprise.raisonSociale }}</a> <br>
         {# | date('d/m/y') pour comvertir une date avec twig #}
         Date d'embauche : {{ employe.dateEmbauche | date('d/m/y') }} <br>
         {# age est récupéré dans employe entity avec getAge, peut importe le suffixe entre getAge / isAge / hasAge, il va trouver #}
