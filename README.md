@@ -5,6 +5,10 @@ vendor qui n'est pas charger sur git
 
 Glossaire : Doctrine -> ORM ( Object Relational Mapping ) ou couche d'abstraction
 
+
+---------------------------------------------------------------------
+
+
 Commande liste : 
 Créer un nouoveau projet
 symfony new NomDuProjet --full (ou –webapp en Symfony 6 pour PHP8.X)
