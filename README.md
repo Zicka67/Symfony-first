@@ -9,7 +9,7 @@ Glossaire : Doctrine -> ORM ( Object Relational Mapping ) ou couche d'abstractio
 ---------------------------------------------------------------------
 
 
-Commande liste: 
+Commande liste: <br>
 Créer un nouoveau projet
 symfony new NomDuProjet --full (ou –webapp en Symfony 6 pour PHP8.X)
 
