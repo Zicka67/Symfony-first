@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter une entreprise {% endblock %}
+
+{# Le bloc body ici est = a $content dans le MVC d'avant, qui récupéré les infos avec ob_start etc.. #}
+{% block body %}
+    <h1>Ajouter une entreprise</h1>
+
+    {# On créer un form via TWIG et on lui donne comme argument le nom qu'on a donné au form dans le controller de entreprise ('formAddEntreprise' => $form->createView())   #}
+    <div class="test">
+    {{ form(formAddEntreprise) }}
+    </div>
+{% endblock %}
