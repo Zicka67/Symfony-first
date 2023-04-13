@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détails d'un employé {% endblock %}
+
+{# Le bloc body ici est = a $content dans le MVC d'avant, qui récupéré les infos avec ob_start etc.. #}
+{# ici la vue vient du Controller employé, avec la function index(), qui return bien $this->render('employe/index.html.twig', #}
+{% block body %}
+
+    {# employe va récupérer les infos de toString dans employe Entity #}
+    {# ou grace au toString <h1>{{ employe }}</h1> et ca va récupérer les informations du toString de employe #}
+    <h1>{{ employe.prenom }} {{ employe.nom }}</h1>
+    <p>
+        {{ employe.ville }} <br>
+        {# {{ employe.entreprise }} grace au toString dans entreprise, il va récupérer les infos dedans #}
+        {# sinon #}
+        Entreprise : {{ employe.entreprise.raisonSociale }} <br>
+        {# | date('d/m/y') pour comvertir une date avec twig #}
+        Date d'embauche : {{ employe.dateEmbauche | date('d/m/y') }} <br>
+        {# age est récupéré dans employe entity avec getAge, peut importe le suffixe entre getAge / isAge / hasAge, il va trouver #}
+        Date de naissance : {{ employe.dateNaissance | date('d/m/y') }} ({{ employe.age }}) ans <br>
+    </p>
+
+{% endblock %}
