@@ -29,12 +29,18 @@ class EntrepriseController extends AbstractController
   
     //Route entre le lien de la méthode et l'URL (qu'on veut afficher)
     #[Route('/entreprise/add', name: 'add_entreprise')]
+    //route pour editer a partir de la function add (bien penser a mettre l'id pour qu'il sache quel entreprise ou veut editer)
+    #[Route('/entreprise/{id}edit', name: 'edit_entreprise')]
     // Ici on créer une function pour add une entreprise 
     // en paramètre : 
     // D'ABORD on ajoute ManagerRegistery $doctrine pour se connecter à la DB
     // PUIS l'objet qu'on souhaite ajouter ici Entreprise $entreprise, null pour lui donner une valeur par defaut en DB
     // ENFIN Request
     public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Request $request): Response {
+        //Condition pour faire passer la function ADD a EDIT, si l'entreprise n'existe pas on ADD sinon on EDIT
+        if(!$entreprise) {
+            $entreprise = new Entreprise();
+        }
         //On va construire un form avec $builder qui est dans EntrepriseType( form ), de l'entity entreprise
         $form = $this->createForm(EntrepriseType::class, $entreprise);
         //Ici handleRequest() va analyser les données pour les insérer dans le form
@@ -60,6 +66,20 @@ class EntrepriseController extends AbstractController
             //'leNomQuonVeut' et on lui donne une vue générée par createView du form
            'formAddEntreprise' => $form->createView()
         ]);
+    }
+
+    #[Route('/entreprise/{id}/delete', name: 'delete_entreprise')]
+    public function delete(ManagerRegistry $doctrine, Entreprise $entreprise): Response
+    {   
+        //On récupère le manager de $doctrine pour lui faire faire la préparation et l'execution(remove et flush sont natif du manager)
+        $entityManager = $doctrine->getManager();
+        //On enlève l'élément de la collection
+        $entityManager->remove($entreprise);
+        //On execute
+        $entityManager->flush();
+
+        //On redirige après la suppression 
+        return $this->redirectToRoute('app_entreprise');
     }
 
     #[Route('/entreprise/{id}', name: 'show_entreprise')]
