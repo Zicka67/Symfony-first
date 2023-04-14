@@ -15,7 +15,10 @@
     {# Si __toString existe dans entreprise pour récupérer les infos via toString #}
     {# {{  employe }} embauché par {{ employe.entreprise }}<br> #}
     {# OU sans tooString pour récupérer en chainage #}
-    <a href="{{path('show_employe', {'id': employe.id}) }}">{{  employe.prenom }} {{  employe.nom }}</a>  de la ville : {{  employe.ville }} est embauché par {{ employe.entreprise.raisonSociale }} au {{ employe.entreprise.adresse }}<br>
+    <a href="{{path('show_employe', {'id': employe.id}) }}">{{ employe.prenom }} {{ employe.nom }}</a>  de la ville : {{ employe.ville }} est embauché par {{ employe.entreprise.raisonSociale }} au {{ employe.entreprise.adresse }}<br>
+    <a class="btn btn-warning" href="{{ path('edit_employe', {'id': employe.id}) }}">Editer</a> 
+    <a class="btn btn-danger" href="{{ path('delete_employe', {'id': employe.id}) }}">Delete</a> 
+       <br> 
     {% endfor %}
 
 {% endblock %}
