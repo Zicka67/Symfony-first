@@ -3,7 +3,8 @@
 Bien penser à faire un      composer install     à la racine du projet à chaque pull, pour réinstaller
 vendor qui n'est pas charger sur git
 
-Glossaire : Doctrine -> ORM ( Object Relational Mapping ) ou couche d'abstraction
+Glossaire : Doctrine -> ORM ( Object Relational Mapping ) ou couche d'abstraction <br>
+token CSRF -> cross-site request forgery
 
 
 ---------------------------------------------------------------------
